@@ -4,31 +4,22 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/*
- * This is completed in Easy mode. If you want to practice, please delete this file.
- * イージーモードではこちらは完成させてあります。作成を練習したい場合は一度ファイルごと削除してください。
- */
 public class InquiryForm {
 
-    public InquiryForm() {
-    }
-
-    public InquiryForm(String name, String email, String contents) {
-        super();
-        this.name = name;
-        this.email = email;
-        this.contents = contents;
-    }
-
-    @Size(min = 1, max = 20, message = "Please input 20 characters or less")
+    // アノテーションを使い各フィールドに対する条件を記述
+    @Size(min = 1, max = 20, message = "Please input 20characters or less")
     private String name;
 
+    // @Emailに関してはセキュリティが弱いらしく違うものを本来は使うといいらしい
     @NotNull
-    @Email(message = "Invalid E-mail Format")
+    @Email(message = "invalid E-mail Format")
     private String email;
 
     @NotNull
     private String contents;
+
+    public InquiryForm() {
+    }
 
     public String getName() {
         return name;
@@ -53,6 +44,4 @@ public class InquiryForm {
     public void setContents(String contents) {
         this.contents = contents;
     }
-
-
 }
