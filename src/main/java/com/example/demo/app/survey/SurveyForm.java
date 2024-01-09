@@ -1,53 +1,48 @@
 package com.example.demo.app.survey;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class SurveyForm {
 
-    /*Add parameters(0~150) 引数を追加(0~150)*/
-    private int age;
+    @NotNull
+    @Min(0)
+    @Max(150)
+    private Integer age;
 
-    /*Add parameters(1~5) 引数を追加(1~5)*/
-    private int satisfaction;
+    @NotNull
+    @Min(1)
+    @Max(5)
+    private Integer satisfaction;
 
-    /*Add parameters(200 characters or less) 引数を追加(200文字以内)*/
+    @NotNull
+    @Size(min = 1, max = 200, message = "Please input 200 characters or less")
     private String comment;
 
-    public SurveyForm() {
-    }
 
-    public SurveyForm(int age, int satisfaction, String comment) {
-        this.age = age;
-        this.satisfaction = satisfaction;
-        this.comment = comment;
-    }
-
-
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-
-    public int getSatisfaction() {
+    public Integer getSatisfaction() {
         return satisfaction;
     }
 
-
-    public void setSatisfaction(int satisfaction) {
+    public void setSatisfaction(Integer satisfaction) {
         this.satisfaction = satisfaction;
     }
-
 
     public String getComment() {
         return comment;
     }
 
-
     public void setComment(String comment) {
         this.comment = comment;
     }
-
 }
