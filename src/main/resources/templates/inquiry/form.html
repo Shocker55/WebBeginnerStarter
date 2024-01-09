@@ -10,13 +10,19 @@
 <!--  @{/inquiry/confirm}とすると ドメイン名/inquiry/confirm と同じになる。-->
 <!--  methodをpostにすることで入力するデータをheader情報に含める -->
 <!--  input要素のname と InquiryForm classのフィールドが一致していることを確認 -->
-  <form method="post" action="#" th:action="@{/inquiry/confirm}">
+  <form method="post" action="#" th:action="@{/inquiry/confirm}" th:object="${inquiryForm}">
     <label for="name">お名前:</label>
-    <input id="name" name="name" type="text"><br>
+    <!--  th:objectを設定することによりページに戻ってきた際にも値を残すことができる  -->
+    <!--  *{name}でth:object で設定したobjectの中身を取得  -->
+    <input id="name" name="name" type="text" th:value="*{name}"><br>
+    <!--  #fieldsは自動でValidateした時にエラーがあれば作られる  -->
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
     <label for="email">メール:</label>
-    <input id="email" name="email" type="text"><br>
+    <input id="email" name="email" type="text" th:value="*{email}"><br>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
     <label for="contents">詳細　:</label>
-    <textarea name="contents" id="contents" rows="3" cols="40"></textarea><br>
+    <textarea name="contents" id="contents" rows="3" cols="40" th:field="*{contents}"></textarea><br>
+    <div th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}"></div>
     <input type="submit" value="確認ページへ">
   </form>
 </body>
