@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
@@ -41,12 +38,16 @@ public class InquiryController {
         inquiry.setEmail("sample4@example.com");
         inquiry.setContents("Hello.");
 
-        try {
-            inquiryService.update(inquiry);
-        } catch (InquiryNotFoundException e) {
-            model.addAttribute("message", e);
-            return "error/CustomPage";
-        }
+        // 例外処理1
+//        try {
+//            inquiryService.update(inquiry);
+//        } catch (InquiryNotFoundException e) {
+//            model.addAttribute("message", e);
+//            return "error/CustomPage";
+//        }
+
+        // 例外処理2 try-catchで囲わない
+        inquiryService.update(inquiry);
 
         model.addAttribute("inquiryList", list);
         model.addAttribute("title", "Inquiry Index");
@@ -111,5 +112,12 @@ public class InquiryController {
         redirectAttributes.addFlashAttribute("complete", "Registered");
         // ここのreturnはhtmlではなく、urlを指している
         return "redirect:/inquiry/form";
+    }
+
+    // コントローラー内のメソッドで例外を捕捉
+    @ExceptionHandler(InquiryNotFoundException.class)
+    public String handleException(InquiryNotFoundException e, Model model) {
+        model.addAttribute("message", e);
+        return "error/CustomPage";
     }
 }
