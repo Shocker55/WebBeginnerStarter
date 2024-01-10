@@ -5,7 +5,6 @@
   <title th:text="${title}">Insert title here</title>
 </head>
 <body>
-  <div th:replace="~{block/header::headerA}"></div>
   <h1 th:text="${title}">仮のタイトル</h1>
   <table>
     <tr>
@@ -17,10 +16,10 @@
     </tr>
     <tr th:each="inquiry : ${inquiryList}">
       <td th:text="${inquiry.id}">1</td>
-      <td th:text="${inquiry.name}"></td>
-      <td th:text="${inquiry.email}"></td>
-      <td th:text="${inquiry.contents}"></td>
-      <td th:text="${inquiry.created}"></td>
+      <td th:text="${inquiry.name}">name</td>
+      <td th:text="${inquiry.email}">email</td>
+      <td th:text="${inquiry.contents}">contents</td>
+      <td th:text="${inquiry.created}">created</td>
     </tr>
   </table>
 </body>

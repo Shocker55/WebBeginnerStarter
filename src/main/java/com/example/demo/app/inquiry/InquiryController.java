@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/inquiry")
@@ -24,6 +25,16 @@ public class InquiryController {
     @Autowired
     public InquiryController(InquiryService inquiryService) {
         this.inquiryService = inquiryService;
+    }
+
+    @GetMapping
+    public String index(Model model) {
+        List<Inquiry> list = inquiryService.getAll();
+
+        model.addAttribute("inquiryList", list);
+        model.addAttribute("title", "Inquiry Index");
+
+        return "inquiry/index";
     }
 
     @GetMapping("/form")
@@ -74,7 +85,7 @@ public class InquiryController {
         // まずはInquiryFormというクラスからInquiryというEntityクラスに値を詰め替える
         Inquiry inquiry = new Inquiry();
         inquiry.setName(inquiryForm.getName());
-        inquiry.setName(inquiryForm.getEmail());
+        inquiry.setEmail(inquiryForm.getEmail());
         inquiry.setContents(inquiryForm.getContents());
         inquiry.setCreated(LocalDateTime.now());
 
