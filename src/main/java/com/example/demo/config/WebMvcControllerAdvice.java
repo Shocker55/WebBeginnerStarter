@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.service.InquiryNotFoundException;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.ui.Model;
@@ -26,4 +27,12 @@ public class WebMvcControllerAdvice {
         model.addAttribute("message", e);
         return "error/CustomPage";
     }
+
+    // 例外処理3
+    @ExceptionHandler(InquiryNotFoundException.class)
+    public String handleException(InquiryNotFoundException e, Model model) {
+        model.addAttribute("message", e);
+        return "error/CustomPage";
+    }
+
 }
