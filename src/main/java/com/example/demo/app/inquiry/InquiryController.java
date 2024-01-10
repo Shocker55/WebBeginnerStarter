@@ -52,7 +52,7 @@ public class InquiryController {
         model.addAttribute("inquiryList", list);
         model.addAttribute("title", "Inquiry Index");
 
-        return "inquiry/index";
+        return "inquiry/index_boot";
     }
 
     @GetMapping("/form")
@@ -62,14 +62,14 @@ public class InquiryController {
                        // @ModelAttribute(フラッシュスコープのキーの名前)
                        @ModelAttribute("complete") String complete) {
         model.addAttribute("title", "Inquiry Form");
-        return "inquiry/form";
+        return "inquiry/form_boot";
     }
 
     // confirm画面でgo backした時に表示させるページのルーティング
     @PostMapping("/form")
     public String formGoBack(InquiryForm inquiryForm, Model model) {
         model.addAttribute("title", "Inquiry Form");
-        return "inquiry/form";
+        return "inquiry/form_boot";
     }
 
     @PostMapping("/confirm")
@@ -80,10 +80,10 @@ public class InquiryController {
                           Model model) {
         if(result.hasErrors()) {
            model.addAttribute("title", "Inquiry Form");
-           return "inquiry/form";
+           return "inquiry/form_boot";
         }
         model.addAttribute("title", "Confirm Page");
-        return "inquiry/confirm";
+        return "inquiry/confirm_boot";
     }
 
     @PostMapping("/complete")
@@ -96,7 +96,7 @@ public class InquiryController {
                            RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("title", "Inquiry Form");
-            return "inquiry/form";
+            return "inquiry/form_boot";
         }
 
         // dbとの処理
