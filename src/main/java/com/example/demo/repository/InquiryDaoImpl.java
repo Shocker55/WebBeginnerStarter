@@ -50,4 +50,10 @@ public class InquiryDaoImpl implements InquiryDao {
         return list;
     }
 
+    @Override
+    public int updateInquiry(Inquiry inquiry) {
+        // 通常は下記のupdateが成功すると 1 が返るが失敗すると 0 を返すので 0 に対して例外処理をする
+        return jdbcTemplate.update("UPDATE inquiry SET name = ?, email = ?, contents = ? WHERE id = ?",
+                inquiry.getName(), inquiry.getEmail(), inquiry.getContents(), inquiry.getId());
+    }
 }
