@@ -32,11 +32,11 @@ public class InquiryController {
         // 例外処理用
         // 本来はupdate用のformを作ってupdateをするが今回は簡易的にindexの中で実行
         // id(4)は無いとする
-        Inquiry inquiry = new Inquiry();
-        inquiry.setId(4);
-        inquiry.setName("Jamie");
-        inquiry.setEmail("sample4@example.com");
-        inquiry.setContents("Hello.");
+//        Inquiry inquiry = new Inquiry();
+//        inquiry.setId(4);
+//        inquiry.setName("Jamie");
+//        inquiry.setEmail("sample4@example.com");
+//        inquiry.setContents("Hello.");
 
         // 例外処理1
 //        try {
@@ -47,7 +47,7 @@ public class InquiryController {
 //        }
 
         // 例外処理2 try-catchで囲わない
-        inquiryService.update(inquiry);
+//        inquiryService.update(inquiry);
 
         model.addAttribute("inquiryList", list);
         model.addAttribute("title", "Inquiry Index");
